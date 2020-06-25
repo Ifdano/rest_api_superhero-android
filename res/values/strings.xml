@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MyApplication_Superhero</string>
+    
+    <!-- заголовки окон -->
+    <string name="mainDisplayText"> СУПЕРГЕРОИ </string>
+    <string name="currentDisplayText"> ПОДРОБНАЯ ИНФОРМАЦИЯ \nО СУПЕРГЕРОЕ </string>
+    <string name="updateDisplayText"> ОБНОВЛЕНИЕ ДАННЫХ </string>
+    
+    <!-- кнопки -->
+    <string name="buttonGetText"> ЗАГРУЗИТЬ </string>
+    <string name="buttonClearText"> ОЧИСТИТЬ </string>
+    <string name="buttonDeleteText"> УДАЛИТЬ </string>
+    <string name="buttonUpdateText"> ОБНОВИТЬ </string>
+    <string name="buttonBackText"> НАЗАД </string>
+    <string name="buttonMainText"> НА ГЛАВНУЮ </string>
+    
+    <!-- поля вывода -->
+    <string name="character"> ПЕРСОНАЖ </string>
+    <string name="characterIntelligence"> ИНТЕЛЛЕКТ </string>
+    <string name="characterPower"> СИЛА </string>
+    <string name="characterSpeed"> СКОРОСТЬ </string>
+    <string name="characterName"> ИМЯ </string>
+    <string name="characterRace"> ВИД </string>
+    <string name="characterGender"> ПОЛ </string>
+    <string name="characterHeight"> РОСТ </string>
+    <string name="characterWeight"> ВЕС </string>
+    <string name="characterOccupation"> ДЕЯТЕЛЬНОСТЬ </string>
+    <string name="characterApperance"> ПЕРВОЕ ПОЯВЛЕНИЕ </string>
+    <string name="characterPublisher"> ИЗДАТЕЛЬСТВО </string>
+    
+    <!-- отсутствие вывода данных -->
+    <string name="editHint"> no data </string>
+    <string name="editNameHint"> Input name </string>
+
+</resources>

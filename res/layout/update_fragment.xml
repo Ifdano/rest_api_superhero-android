@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- фрагмент с обновлением информации о персонаже -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:background = "@color/mainBackground">
+        
+   <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:orientation = "vertical">
+            
+        <ImageView
+            android:id = "@+id/avatarImage"
+            android:layout_width = "@dimen/_120sdp"
+            android:layout_height = "@dimen/_120sdp"
+            android:layout_gravity = "center"
+            android:src = "@drawable/noimage"
+            android:background = "@null"/>
+        
+        <EditText
+            android:id = "@+id/editImageUrl"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/character"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editCharacter"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterIntelligence"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editIntelligence"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterPower"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editPower"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterSpeed"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editSpeed"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+            
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterName"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editName"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterRace"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editRace"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterGender"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editGender"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterHeight"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editHeight"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterWeight"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editWeight"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterOccupation"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editOccupation"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterApperance"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editApperance"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <TextView
+           android:layout_width = "match_parent"
+           android:layout_height = "wrap_content"
+           android:text = "@string/characterPublisher"
+           android:textSize = "@dimen/_18ssp"
+           android:textColor = "@color/textColorDark"
+           android:background = "@color/currentInfo" 
+           android:padding = "@dimen/_5sdp"
+           android:gravity = "center"
+           android:layout_marginTop = "@dimen/_10sdp"/>
+        
+        <EditText
+            android:id = "@+id/editPublisher"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:ems = "8"
+            android:textSize = "@dimen/_18ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/editInfo"
+            android:hint = "@string/editHint"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_5sdp"
+            android:layout_marginTop = "@dimen/_10sdp"/>
+            
+   </LinearLayout>
+        
+</ScrollView>

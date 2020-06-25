@@ -1,0 +1,100 @@
+<!-- главное окно -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation = "vertical"
+    android:background = "@color/mainBackground"
+    android:focusable = "true"
+    android:focusableInTouchMode = "true"
+    tools:context=".Main" >
+
+    <TextView
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:text = "@string/mainDisplayText"
+        android:textSize = "@dimen/_18ssp"
+        android:textColor = "@color/textColor"
+        android:background = "@color/mainTextBackground"
+        android:gravity = "center"
+        android:layout_gravity = "center"
+        android:padding = "@dimen/_5sdp"
+        android:layout_weight = "0"/>
+    
+    <!-- ввод имени супергероя -->
+    <EditText
+        android:id = "@+id/editName"
+        android:layout_width = "wrap_content"
+        android:layout_height = "wrap_content"
+        android:ems = "10"
+        android:hint = "@string/editNameHint"
+        android:inputType = "text"
+        android:textSize = "@dimen/_18ssp"
+        android:layout_weight = "0"
+        android:gravity = "center"
+        android:layout_gravity = "center"
+        android:textColor = "@color/textColor"
+        android:background = "@color/currentInfo"
+        android:padding = "@dimen/_5sdp"/>
+    
+    <!-- список с супергероями -->
+    <ListView
+        android:id = "@+id/listCharacters"
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent"
+        android:layout_marginBottom = "@dimen/_10sdp"
+        android:layout_weight = "1"
+        android:divider = "@color/listDivider"
+        android:dividerHeight = "@dimen/_1sdp"/>
+    
+    <!-- кнопки -->
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "wrap_content"
+        android:orientation = "horizontal"
+        android:gravity = "center"
+        android:layout_weight = "0"
+        android:padding = "@dimen/_5sdp"
+        android:layout_marginBottom = "@dimen/_10sdp">
+        
+        <Button
+            android:id = "@+id/buttonGet"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "@string/buttonGetText"
+            android:textSize = "@dimen/_13ssp"
+            android:textColor = "@color/textColorDark"
+            android:background = "@color/buttonGet"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_10sdp"/>
+        
+        <Button
+            android:id = "@+id/buttonClear"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "@string/buttonClearText"
+            android:textSize = "@dimen/_13ssp"
+            android:textColor = "@color/textColor"
+            android:background = "@color/buttonClear"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_10sdp"
+            android:layout_marginLeft = "@dimen/_10sdp"/>
+        
+        <Button
+            android:id = "@+id/buttonDelete"
+            android:layout_width = "wrap_content"
+            android:layout_height = "wrap_content"
+            android:text = "@string/buttonDeleteText"
+            android:textSize = "@dimen/_13ssp"
+            android:textColor = "@color/textColor"
+            android:background = "@color/buttonDelete"
+            android:gravity = "center"
+            android:layout_gravity = "center"
+            android:padding = "@dimen/_10sdp"
+            android:layout_marginLeft = "@dimen/_10sdp"/>
+        
+    </LinearLayout>
+
+</LinearLayout>
