@@ -1,4 +1,4 @@
-//Љласс длЯ кастомного адаптера
+//РљР»Р°СЃСЃ РґР»СЏ РєР°СЃС‚РѕРјРЅРѕРіРѕ Р°РґР°РїС‚РµСЂР°
 
 package com.example.myapplication_superhero.customAdapter;
 
@@ -24,42 +24,42 @@ import com.example.myapplication_superhero.R;
 
 public class CustomAdapter extends ArrayAdapter{
 	
-	//данные длЯ передачи адаптеру
-	//контекст
+	//РґР°РЅРЅС‹Рµ РґР»СЏ РїРµСЂРµРґР°С‡Рё Р°РґР°РїС‚РµСЂСѓ
+	//РєРѕРЅС‚РµРєСЃС‚
 	private Context context;
-	//макет с кастомным списком
+	//РјР°РєРµС‚ СЃ РєР°СЃС‚РѕРјРЅС‹Рј СЃРїРёСЃРєРѕРј
 	private int layoutId;
-	//массив с элементами длЯ списка
+	//РјР°СЃСЃРёРІ СЃ СЌР»РµРјРµРЅС‚Р°РјРё РґР»СЏ СЃРїРёСЃРєР°
 	private ArrayList<Character> characters;
 	
-	//в конструктор передаем контекст, макет списка и массив с данными
+	//РІ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РїРµСЂРµРґР°РµРј РєРѕРЅС‚РµРєСЃС‚, РјР°РєРµС‚ СЃРїРёСЃРєР° Рё РјР°СЃСЃРёРІ СЃ РґР°РЅРЅС‹РјРё
 	public CustomAdapter(Context context, int layoutId, ArrayList<Character> characters){
 		super(context, layoutId, characters);
 		
-		//получаем данные
+		//РїРѕР»СѓС‡Р°РµРј РґР°РЅРЅС‹Рµ
 		this.context = context;
 		this.layoutId = layoutId;
 		this.characters = characters;
 	}
 	
-	//метод длЯ установка данных персонажей в Ячейки списка
+	//РјРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєР° РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶РµР№ РІ СЏС‡РµР№РєРё СЃРїРёСЃРєР°
 	public View getView(int position, View customView, ViewGroup container){
-		//определЯем макет списка и его пустые Ячейки
+		//РѕРїСЂРµРґРµР»СЏРµРј РјР°РєРµС‚ СЃРїРёСЃРєР° Рё РµРіРѕ РїСѓСЃС‚С‹Рµ СЏС‡РµР№РєРё
 		LayoutInflater inflater = LayoutInflater.from(context);
 		View view = inflater.inflate(layoutId, container, false);
 		
-		//берем объекты из списка
+		//Р±РµСЂРµРј РѕР±СЉРµРєС‚С‹ РёР· СЃРїРёСЃРєР°
 		Character character = characters.get(position);
 		
-		//находим компоненты из макета списка
+		//РЅР°С…РѕРґРёРј РєРѕРјРїРѕРЅРµРЅС‚С‹ РёР· РјР°РєРµС‚Р° СЃРїРёСЃРєР°
 		TextView text = (TextView)view.findViewById(R.id.text);
 		ImageView image = (ImageView)view.findViewById(R.id.image);
 		
-		//устанавливаем данные объектов [аватарки и имена] в полЯ
-		//устанавливаем имена
+		//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РґР°РЅРЅС‹Рµ РѕР±СЉРµРєС‚РѕРІ [Р°РІР°С‚Р°СЂРєРё Рё РёРјРµРЅР°] РІ РїРѕР»СЏ
+		//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёРјРµРЅР°
 		text.setText(character.getCharacterName());
 		
-		//создаем Callback длЯ нашего Picasso
+		//СЃРѕР·РґР°РµРј Callback РґР»СЏ РЅР°С€РµРіРѕ Picasso
 		Callback callback = new Callback(){
 			public void onSuccess(){
 				Log.v("IMAGE LOAD", "SUCCESS");
@@ -70,7 +70,7 @@ public class CustomAdapter extends ArrayAdapter{
 			}
 		};
 		
-		//устанавливаем аватарки
+		//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј Р°РІР°С‚Р°СЂРєРё
 		Picasso
 			.with(context)
 			.load(character.getCharacterAvatarUrl())

@@ -1,4 +1,4 @@
-//Љласс с паттерном "Ћдиночка"
+//Р‰Р»Р°СЃСЃ СЃ РїР°С‚С‚РµСЂРЅРѕРј "Р‹РґРёРЅРѕС‡РєР°"
 
 package com.example.myapplication_superhero.characterApi;
 

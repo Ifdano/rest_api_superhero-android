@@ -1,5 +1,5 @@
-/*Диалоговое окно с подтверждением удаления персонажа из базы данных,
-Удаление на экране с подробной информацией*/
+/*Р”РёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ СЃ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёРµРј СѓРґР°Р»РµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…,
+РЈРґР°Р»РµРЅРёРµ РЅР° СЌРєСЂР°РЅРµ СЃ РїРѕРґСЂРѕР±РЅРѕР№ РёРЅС„РѕСЂРјР°С†РёРµР№*/
 
 package com.example.myapplication_superhero.dialogs;
 
@@ -19,11 +19,11 @@ public class DeleteDialogCurrent extends DialogFragment{
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
 		builder
-			.setTitle("ВНИМАНИЕ!")
-			.setMessage("Вы подтверждаете удаление персонажа из базы данных?")
+			.setTitle("Р’РќРРњРђРќРР•!")
+			.setMessage("Р’С‹ РїРѕРґС‚РІРµСЂР¶РґР°РµС‚Рµ СѓРґР°Р»РµРЅРёРµ РїРµСЂСЃРѕРЅР°Р¶Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…?")
 			.setCancelable(true)
 			.setPositiveButton(
-					"Нет",
+					"РќРµС‚",
 					new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int id){
 							dialog.cancel();
@@ -31,11 +31,11 @@ public class DeleteDialogCurrent extends DialogFragment{
 					}
 				)
 			.setNegativeButton(
-					"Да",
+					"Р”Р°",
 					new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int id){
-							/*если подтвердили удаление, то вызываем метод deleteCharacter из класса CurrentData,
-							 чтобы удалить персонажа из базы данных */
+							/*РµСЃР»Рё РїРѕРґС‚РІРµСЂРґРёР»Рё СѓРґР°Р»РµРЅРёРµ, С‚Рѕ РІС‹Р·С‹РІР°РµРј РјРµС‚РѕРґ deleteCharacter РёР· РєР»Р°СЃСЃР° CurrentData,
+							 С‡С‚РѕР±С‹ СѓРґР°Р»РёС‚СЊ РїРµСЂСЃРѕРЅР°Р¶Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С… */
 							((CurrentData)getActivity()).deleteCharacter();
 						}
 					}

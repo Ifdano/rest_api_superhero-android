@@ -1,4 +1,4 @@
-//Ќаш API длЯ запроса данных
+//РќР°С€ API РґР»СЏ Р·Р°РїСЂРѕСЃР° РґР°РЅРЅС‹С…
 
 package com.example.myapplication_superhero.characterApi;
 
@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 import io.reactivex.Flowable;
 
 public interface SuperheroAPI {
-	//общаЯ сслыка запроса: https://www.superheroapi.com/api.php/894384864360671/search/batman
+	//РѕР±С‰Р°СЏ СЃСЃР»С‹РєР° Р·Р°РїСЂРѕСЃР°: https://www.superheroapi.com/api.php/894384864360671/search/batman
 	@GET("api.php/{user_key}/search/{superhero_name}")
 	Flowable<Characters> getCharacter(
 			@Path("user_key") String user_key,

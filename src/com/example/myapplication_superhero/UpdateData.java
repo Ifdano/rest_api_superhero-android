@@ -1,4 +1,4 @@
-//Класс для обновление данных выбранного персонажа по id
+//РљР»Р°СЃСЃ РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёРµ РґР°РЅРЅС‹С… РІС‹Р±СЂР°РЅРЅРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р° РїРѕ id
 
 package com.example.myapplication_superhero;
 
@@ -28,17 +28,17 @@ import com.squareup.picasso.Callback;
 import com.example.myapplication_superhero.data.SuperheroContract.SuperheroEntry;
 import com.example.myapplication_superhero.data.SuperheroDbHelper;
 
-//диалоговые окна
+//РґРёР°Р»РѕРіРѕРІС‹Рµ РѕРєРЅР°
 import com.example.myapplication_superhero.dialogs.UpdateDialog;
 import com.example.myapplication_superhero.dialogs.BackDialog;
 import com.example.myapplication_superhero.dialogs.BackMainDialog;
 
 public class UpdateData extends FragmentActivity implements OnTouchListener{
-	/*для получения/передачи ID персонажа из базы данных, которого мы выбрали,
-	  чтобы знать данные какого персонажа нужно вывести*/
+	/*РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ/РїРµСЂРµРґР°С‡Рё ID РїРµСЂСЃРѕРЅР°Р¶Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…, РєРѕС‚РѕСЂРѕРіРѕ РјС‹ РІС‹Р±СЂР°Р»Рё,
+	  С‡С‚РѕР±С‹ Р·РЅР°С‚СЊ РґР°РЅРЅС‹Рµ РєР°РєРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р° РЅСѓР¶РЅРѕ РІС‹РІРµСЃС‚Рё*/
 	public static final String KEY_ID = "key_id";
 	
-	//компоненты
+	//РєРѕРјРїРѕРЅРµРЅС‚С‹
 	private Button buttonUpdate;
 	private Button buttonBack;
 	private Button buttonMain;
@@ -63,7 +63,7 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 	
 	private SuperheroDbHelper DbHelper;
 	
-	//индекс персонажа, данные которого мы хотим изменить
+	//РёРЅРґРµРєСЃ РїРµСЂСЃРѕРЅР°Р¶Р°, РґР°РЅРЅС‹Рµ РєРѕС‚РѕСЂРѕРіРѕ РјС‹ С…РѕС‚РёРј РёР·РјРµРЅРёС‚СЊ
 	private int currentId;
 
 	protected void onCreate(Bundle savedInstanceState){
@@ -71,13 +71,13 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 		setContentView(R.layout.activity_update);
 		
 		init();
-		//получение индекса персонажа для удаления
+		//РїРѕР»СѓС‡РµРЅРёРµ РёРЅРґРµРєСЃР° РїРµСЂСЃРѕРЅР°Р¶Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ
 		getCharacterId();
 	}
 	
-	//начальная инициализация
+	//РЅР°С‡Р°Р»СЊРЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	public void init(){
-		//находим компоненты
+		//РЅР°С…РѕРґРёРј РєРѕРјРїРѕРЅРµРЅС‚С‹
 		buttonUpdate = (Button)findViewById(R.id.buttonUpdate);
 		buttonBack = (Button)findViewById(R.id.buttonBack);
 		buttonMain = (Button)findViewById(R.id.buttonMain);
@@ -98,16 +98,16 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 		editApperance = (EditText)findViewById(R.id.editApperance);
 		editPublisher = (EditText)findViewById(R.id.editPublisher);
 		
-		//устанавливаем слушателей
+		//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃР»СѓС€Р°С‚РµР»РµР№
 		buttonUpdate.setOnTouchListener(this);
 		buttonBack.setOnTouchListener(this);
 		buttonMain.setOnTouchListener(this);
 		
-		//создаем базу данных
+		//СЃРѕР·РґР°РµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
 		DbHelper = new SuperheroDbHelper(this);
 	}
 	
-	//получаем id персонажа, который мы передали в это окно
+	//РїРѕР»СѓС‡Р°РµРј id РїРµСЂСЃРѕРЅР°Р¶Р°, РєРѕС‚РѕСЂС‹Р№ РјС‹ РїРµСЂРµРґР°Р»Рё РІ СЌС‚Рѕ РѕРєРЅРѕ
 	public void getCharacterId(){
 		intent = getIntent();
 		
@@ -118,13 +118,13 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 		}else{
 			Toast.makeText(
 					getApplicationContext(),
-					"Ошибка получения ID!",
+					"РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ ID!",
 					Toast.LENGTH_LONG
 				).show();
 		}
 	}
 	
-	//отображение данных персонажа из базы данных
+	//РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	public void displayDatabaseInfo(){
 		SQLiteDatabase db = DbHelper.getReadableDatabase();
 		
@@ -144,8 +144,8 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 				SuperheroEntry.COLUMN_IMAGE_URL,
 		};
 		
-		/*выборка из базы данных
-		  в нашем случае, мы находим данные персонажа по id*/
+		/*РІС‹Р±РѕСЂРєР° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
+		  РІ РЅР°С€РµРј СЃР»СѓС‡Р°Рµ, РјС‹ РЅР°С…РѕРґРёРј РґР°РЅРЅС‹Рµ РїРµСЂСЃРѕРЅР°Р¶Р° РїРѕ id*/
 		String selection = SuperheroEntry._ID + "=?";
 		String[] selectionArgs = {"" + currentId};
 		
@@ -190,7 +190,7 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 				String currentPublisher = cursor.getString(publisherIndex);
 				String currentImageUrl = cursor.getString(imageUrlIndex);
 				
-				//устанавливаем изображение
+				//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёР·РѕР±СЂР°Р¶РµРЅРёРµ
 				Callback callback = new Callback(){
 					public void onSuccess(){}
 					
@@ -204,7 +204,7 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 					.error(R.drawable.errorimage)
 					.into(avatarImage);
 				
-				//устанавливаем данные в поля, чтобы потом их изменять
+				//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РґР°РЅРЅС‹Рµ РІ РїРѕР»СЏ, С‡С‚РѕР±С‹ РїРѕС‚РѕРј РёС… РёР·РјРµРЅСЏС‚СЊ
 				editCharacter.setText(currentCharacter);
 				editIntelligence.setText("" + currentIntelligence);
 				editPower.setText("" + currentPower);
@@ -228,19 +228,19 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 		}
 	}
 	
-	//обновление данных персонажа в базе данных
+	//РѕР±РЅРѕРІР»РµРЅРёРµ РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶Р° РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…
 	public void updateCharacter(){
-		//берем базу данных для записи
+		//Р±РµСЂРµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С… РґР»СЏ Р·Р°РїРёСЃРё
 		SQLiteDatabase db = DbHelper.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		
-		//получаем данные из полей
+		//РїРѕР»СѓС‡Р°РµРј РґР°РЅРЅС‹Рµ РёР· РїРѕР»РµР№
 		String tempImageUrl = editImageUrl.getText().toString().trim();
 		
 		String tempCharacter = editCharacter.getText().toString().trim();
 		
-		/*если строка пустая, то будет ошибка при переводе в число
-		поэтому заранее проверяем, чтобы поле не было пустым*/
+		/*РµСЃР»Рё СЃС‚СЂРѕРєР° РїСѓСЃС‚Р°СЏ, С‚Рѕ Р±СѓРґРµС‚ РѕС€РёР±РєР° РїСЂРё РїРµСЂРµРІРѕРґРµ РІ С‡РёСЃР»Рѕ
+		РїРѕСЌС‚РѕРјСѓ Р·Р°СЂР°РЅРµРµ РїСЂРѕРІРµСЂСЏРµРј, С‡С‚РѕР±С‹ РїРѕР»Рµ РЅРµ Р±С‹Р»Рѕ РїСѓСЃС‚С‹Рј*/
 		int tempIntelligence = 0;
 		String tempIntelligenceElse = editIntelligence.getText().toString().trim();
 		if(tempIntelligenceElse.length() > 0)
@@ -265,15 +265,15 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 		String tempAppearance = editApperance.getText().toString().trim();
 		String tempPublisher = editPublisher.getText().toString().trim();
 		
-		/*если все данные полей заполнены, то обновляем данные
-		  в противном случае сообщаем, что нужно заполнить все поля*/
+		/*РµСЃР»Рё РІСЃРµ РґР°РЅРЅС‹Рµ РїРѕР»РµР№ Р·Р°РїРѕР»РЅРµРЅС‹, С‚Рѕ РѕР±РЅРѕРІР»СЏРµРј РґР°РЅРЅС‹Рµ
+		  РІ РїСЂРѕС‚РёРІРЅРѕРј СЃР»СѓС‡Р°Рµ СЃРѕРѕР±С‰Р°РµРј, С‡С‚Рѕ РЅСѓР¶РЅРѕ Р·Р°РїРѕР»РЅРёС‚СЊ РІСЃРµ РїРѕР»СЏ*/
 		if(tempImageUrl.length() > 0 && tempCharacter.length() > 0 && tempIntelligenceElse.length() > 0 && 
 	       tempPowerElse.length() > 0 && tempSpeedElse.length() > 0 && tempName.length() > 0 && 
 		   tempRace.length() > 0 && tempGender.length() > 0 && tempHeight.length() > 0 &&
 		   tempWeight.length() > 0 && tempOccupation.length() > 0 && tempAppearance.length() > 0 &&
 		   tempPublisher.length() > 0){
 			
-			//устанавливаем обновленные данные
+			//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РѕР±РЅРѕРІР»РµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ
 			values.put(SuperheroEntry.COLUMN_CHARACTER, tempCharacter);
 			values.put(SuperheroEntry.COLUMN_INTELLIGENCE, tempIntelligence);
 			values.put(SuperheroEntry.COLUMN_POWER, tempPower);
@@ -288,7 +288,7 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 			values.put(SuperheroEntry.COLUMN_PUBLISHER, tempPublisher);
 			values.put(SuperheroEntry.COLUMN_IMAGE_URL, tempImageUrl);
 			
-			//далем запрос: UPDATE TABLE_NAME SET values WHERE ID = currentId
+			//РґР°Р»РµРј Р·Р°РїСЂРѕСЃ: UPDATE TABLE_NAME SET values WHERE ID = currentId
 			db.update(
 					SuperheroEntry.TABLE_NAME,
 					values,
@@ -298,40 +298,40 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 			
 			Toast.makeText(
 					getApplicationContext(),
-					"Обновлено!",
+					"РћР±РЅРѕРІР»РµРЅРѕ!",
 					Toast.LENGTH_LONG
 				).show();
 			
-			//после обновления - возвращаемся на предыдущий экран
+			//РїРѕСЃР»Рµ РѕР±РЅРѕРІР»РµРЅРёСЏ - РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СЌРєСЂР°РЅ
 			intent = new Intent(this, CurrentData.class);
 			
-			//не забыв передать id персонажа, которого мы обновили
+			//РЅРµ Р·Р°Р±С‹РІ РїРµСЂРµРґР°С‚СЊ id РїРµСЂСЃРѕРЅР°Р¶Р°, РєРѕС‚РѕСЂРѕРіРѕ РјС‹ РѕР±РЅРѕРІРёР»Рё
 			intent.putExtra(KEY_ID, currentId);
 			startActivity(intent);
 			
 		}else{
 			Toast.makeText(
 					getApplicationContext(),
-					"Заполните все поля!",
+					"Р—Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ!",
 					Toast.LENGTH_LONG
 				).show();
 		}
 		
 	}
 	
-	/*метод, который вызывается после подтверждения [в диалоговом окне]
-	  для возврата на предыдущий экран*/
+	/*РјРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ [РІ РґРёР°Р»РѕРіРѕРІРѕРј РѕРєРЅРµ]
+	  РґР»СЏ РІРѕР·РІСЂР°С‚Р° РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СЌРєСЂР°РЅ*/
 	public void setBack(){
 		intent = new Intent(this, CurrentData.class);
 		
-		//не забываем передать id персонажа
+		//РЅРµ Р·Р°Р±С‹РІР°РµРј РїРµСЂРµРґР°С‚СЊ id РїРµСЂСЃРѕРЅР°Р¶Р°
 		intent.putExtra(KEY_ID, currentId);
 		
 		startActivity(intent);
 	}
 	
-	/*метод, который вызывается после подтверждения [в диалоговом окне]
-	  для возврата на главный экран*/
+	/*РјРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РІС‹Р·С‹РІР°РµС‚СЃСЏ РїРѕСЃР»Рµ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ [РІ РґРёР°Р»РѕРіРѕРІРѕРј РѕРєРЅРµ]
+	  РґР»СЏ РІРѕР·РІСЂР°С‚Р° РЅР° РіР»Р°РІРЅС‹Р№ СЌРєСЂР°РЅ*/
 	public void setBackMain(){
 		intent = new Intent(this, Main.class);
 		startActivity(intent);
@@ -339,25 +339,25 @@ public class UpdateData extends FragmentActivity implements OnTouchListener{
 	
 	public boolean onTouch(View view, MotionEvent event){
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
-			//кнопка для обновления данных
+			//РєРЅРѕРїРєР° РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ РґР°РЅРЅС‹С…
 			if(view == buttonUpdate){
-				//диалоговое окно для подтверждения обновления
+				//РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РѕР±РЅРѕРІР»РµРЅРёСЏ
 				FragmentManager manager = getSupportFragmentManager();
 				UpdateDialog dialog = new UpdateDialog();
 				dialog.show(manager, "update_dialog");
 			}
 			
-			//кнопка возврата на предыдущее окно
+			//РєРЅРѕРїРєР° РІРѕР·РІСЂР°С‚Р° РЅР° РїСЂРµРґС‹РґСѓС‰РµРµ РѕРєРЅРѕ
 			if(view == buttonBack){
-				//диалоговое окно для подтверждения возврата
+				//РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РІРѕР·РІСЂР°С‚Р°
 				FragmentManager manager = getSupportFragmentManager();
 				BackDialog dialog = new BackDialog();
 				dialog.show(manager, "back_dialog");
 			}
 			
-			//кнопка возврата на главный экран
+			//РєРЅРѕРїРєР° РІРѕР·РІСЂР°С‚Р° РЅР° РіР»Р°РІРЅС‹Р№ СЌРєСЂР°РЅ
 			if(view == buttonMain){
-				//диалоговое окно для подтверждения возврата
+				//РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РІРѕР·РІСЂР°С‚Р°
 				FragmentManager manager = getSupportFragmentManager();
 				BackMainDialog dialog = new BackMainDialog();
 				dialog.show(manager, "back_main_dialog");

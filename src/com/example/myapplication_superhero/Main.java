@@ -1,31 +1,31 @@
-//Главное окно со списком персонажей
+//Р“Р»Р°РІРЅРѕРµ РѕРєРЅРѕ СЃРѕ СЃРїРёСЃРєРѕРј РїРµСЂСЃРѕРЅР°Р¶РµР№
 
 package com.example.myapplication_superhero;
 
 import android.os.Bundle;
 
-//компоненты окна
+//РєРѕРјРїРѕРЅРµРЅС‚С‹ РѕРєРЅР°
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.widget.EditText;
 
-//для работы с обычным списком
+//РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РѕР±С‹С‡РЅС‹Рј СЃРїРёСЃРєРѕРј
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
-//обработка касаний
+//РѕР±СЂР°Р±РѕС‚РєР° РєР°СЃР°РЅРёР№
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.MotionEvent;
 
-//переход на другое окно
+//РїРµСЂРµС…РѕРґ РЅР° РґСЂСѓРіРѕРµ РѕРєРЅРѕ
 import android.content.Intent;
-//для изменения и удаления данных из базы данных
+//РґР»СЏ РёР·РјРµРЅРµРЅРёСЏ Рё СѓРґР°Р»РµРЅРёСЏ РґР°РЅРЅС‹С… РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 import android.content.ContentValues;
 
-//для работы с базой данных
+//РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ Р±Р°Р·РѕР№ РґР°РЅРЅС‹С…
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -34,11 +34,11 @@ import android.support.v4.app.FragmentManager;
 
 import android.util.Log;
 
-//подписчики
+//РїРѕРґРїРёСЃС‡РёРєРё
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
-//для многопоточности
+//РґР»СЏ РјРЅРѕРіРѕРїРѕС‚РѕС‡РЅРѕСЃС‚Рё
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
@@ -46,54 +46,54 @@ import io.reactivex.annotations.NonNull;
 
 import java.util.ArrayList;
 
-//для кастомного адаптера списка
+//РґР»СЏ РєР°СЃС‚РѕРјРЅРѕРіРѕ Р°РґР°РїС‚РµСЂР° СЃРїРёСЃРєР°
 import com.example.myapplication_superhero.customAdapter.CustomAdapter;
 import com.example.myapplication_superhero.customAdapter.Character;
 
-//для базы данных
+//РґР»СЏ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 import com.example.myapplication_superhero.data.SuperheroContract.SuperheroEntry;
 import com.example.myapplication_superhero.data.SuperheroDbHelper;
 
-//диалоговое окно для удаления
+//РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ
 import com.example.myapplication_superhero.dialogs.DeleteDialog;
 import com.example.myapplication_superhero.dialogs.DeleteAllDialog;
 
-//для получения данных по api
+//РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ РґР°РЅРЅС‹С… РїРѕ api
 import com.example.myapplication_superhero.characterApi.Characters;
 import com.example.myapplication_superhero.characterApi.SuperheroService;
 import com.example.myapplication_superhero.characterApi.Results;
 
-//основной класс, реализующий интерфейсы обработки касаний экрана, списка и выпадающего списка 
+//РѕСЃРЅРѕРІРЅРѕР№ РєР»Р°СЃСЃ, СЂРµР°Р»РёР·СѓСЋС‰РёР№ РёРЅС‚РµСЂС„РµР№СЃС‹ РѕР±СЂР°Р±РѕС‚РєРё РєР°СЃР°РЅРёР№ СЌРєСЂР°РЅР°, СЃРїРёСЃРєР° Рё РІС‹РїР°РґР°СЋС‰РµРіРѕ СЃРїРёСЃРєР° 
 public class Main extends FragmentActivity implements OnTouchListener, OnItemClickListener, OnItemLongClickListener{
-	/*для передачи ID элемента из базы данных в другое окно,
-	 чтобы мы знали данные какого персонажа нужно будет вывести на экран*/ 
+	/*РґР»СЏ РїРµСЂРµРґР°С‡Рё ID СЌР»РµРјРµРЅС‚Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С… РІ РґСЂСѓРіРѕРµ РѕРєРЅРѕ,
+	 С‡С‚РѕР±С‹ РјС‹ Р·РЅР°Р»Рё РґР°РЅРЅС‹Рµ РєР°РєРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р° РЅСѓР¶РЅРѕ Р±СѓРґРµС‚ РІС‹РІРµСЃС‚Рё РЅР° СЌРєСЂР°РЅ*/ 
 	public static final String KEY_ID = "key_id";
 
-	//кнопки полного очищения данных и удаления
+	//РєРЅРѕРїРєРё РїРѕР»РЅРѕРіРѕ РѕС‡РёС‰РµРЅРёСЏ РґР°РЅРЅС‹С… Рё СѓРґР°Р»РµРЅРёСЏ
 	private Button buttonGetData;
 	private Button buttonClearData;
 	private Button buttonDeleteData;
 	
-	//поле для ввода имени персонажа
+	//РїРѕР»Рµ РґР»СЏ РІРІРѕРґР° РёРјРµРЅРё РїРµСЂСЃРѕРЅР°Р¶Р°
 	private EditText editName;
 	
-	//список с персонажами
+	//СЃРїРёСЃРѕРє СЃ РїРµСЂСЃРѕРЅР°Р¶Р°РјРё
 	private ListView listCharacters;
-	//массив с данными персонажей
+	//РјР°СЃСЃРёРІ СЃ РґР°РЅРЅС‹РјРё РїРµСЂСЃРѕРЅР°Р¶РµР№
 	private ArrayList<Character> characters;
-	//кастомный адаптер
+	//РєР°СЃС‚РѕРјРЅС‹Р№ Р°РґР°РїС‚РµСЂ
 	private CustomAdapter customAdapter;
-	//для хранения id элементов
+	//РґР»СЏ С…СЂР°РЅРµРЅРёСЏ id СЌР»РµРјРµРЅС‚РѕРІ
 	private ArrayList<Integer> charactersId;
 	
 	private Intent intent;
 	
-	//база данных
+	//Р±Р°Р·Р° РґР°РЅРЅС‹С…
 	private SuperheroDbHelper DbHelper;
 	
-	//id персонажа, которого нужно будет удалить
+	//id РїРµСЂСЃРѕРЅР°Р¶Р°, РєРѕС‚РѕСЂРѕРіРѕ РЅСѓР¶РЅРѕ Р±СѓРґРµС‚ СѓРґР°Р»РёС‚СЊ
 	private int characterIdDelete;
-	//введенное имя персонажа, данные которого мы хотим получит
+	//РІРІРµРґРµРЅРЅРѕРµ РёРјСЏ РїРµСЂСЃРѕРЅР°Р¶Р°, РґР°РЅРЅС‹Рµ РєРѕС‚РѕСЂРѕРіРѕ РјС‹ С…РѕС‚РёРј РїРѕР»СѓС‡РёС‚
 	private String nameForDisplayData;
 	
 	@Override
@@ -101,7 +101,7 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//начальная инициализация
+		//РЅР°С‡Р°Р»СЊРЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 		init();
 	}
 	
@@ -109,17 +109,17 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 	protected void onStart(){
 		super.onStart();
 		
-		//обнуляем/очищаем массивы данных
+		//РѕР±РЅСѓР»СЏРµРј/РѕС‡РёС‰Р°РµРј РјР°СЃСЃРёРІС‹ РґР°РЅРЅС‹С…
 		charactersId.clear();
 		characters.clear();
 		
-		//выводим данные из базы данных на экран
+		//РІС‹РІРѕРґРёРј РґР°РЅРЅС‹Рµ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С… РЅР° СЌРєСЂР°РЅ
 		displayDatabaseInfo();
 	}
 	
-	//начальная инициализация
+	//РЅР°С‡Р°Р»СЊРЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	public void init(){
-		//находим компоненты
+		//РЅР°С…РѕРґРёРј РєРѕРјРїРѕРЅРµРЅС‚С‹
 		buttonGetData = (Button)findViewById(R.id.buttonGet);
 		buttonClearData = (Button)findViewById(R.id.buttonClear);
 		buttonDeleteData = (Button)findViewById(R.id.buttonDelete);
@@ -128,7 +128,7 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 		
 		editName = (EditText)findViewById(R.id.editName);
 		
-		//устанавливаем слушателей
+		//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃР»СѓС€Р°С‚РµР»РµР№
 		buttonGetData.setOnTouchListener(this);
 		buttonClearData.setOnTouchListener(this);
 		buttonDeleteData.setOnTouchListener(this);
@@ -136,76 +136,76 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 		listCharacters.setOnItemClickListener(this);
 		listCharacters.setOnItemLongClickListener(this);
 		
-		//создаем базу данных
+		//СЃРѕР·РґР°РµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
 		DbHelper = new SuperheroDbHelper(this);
 		
-		//создаеи массивы для хранения персонажей и их id
+		//СЃРѕР·РґР°РµРё РјР°СЃСЃРёРІС‹ РґР»СЏ С…СЂР°РЅРµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶РµР№ Рё РёС… id
 		characters = new ArrayList<Character>();
 		charactersId = new ArrayList<Integer>();
 		
-		//в самом начале, нет персонажей дла удаления
+		//РІ СЃР°РјРѕРј РЅР°С‡Р°Р»Рµ, РЅРµС‚ РїРµСЂСЃРѕРЅР°Р¶РµР№ РґР»Р° СѓРґР°Р»РµРЅРёСЏ
 		characterIdDelete = -1;
-		//и нет введенного имени
+		//Рё РЅРµС‚ РІРІРµРґРµРЅРЅРѕРіРѕ РёРјРµРЅРё
 		nameForDisplayData = "";
 	}
 	
-	//для удаления элемента из базы данных
+	//РґР»СЏ СѓРґР°Р»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	public void deleteCharacter(){
-		//берем базу данных для записи
+		//Р±РµСЂРµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С… РґР»СЏ Р·Р°РїРёСЃРё
 		SQLiteDatabase db = DbHelper.getWritableDatabase();
 		
-		/*если у нас есть персонаж для удаления [если id > 0], 
-		 то удаляем его из базы данных*/
+		/*РµСЃР»Рё Сѓ РЅР°СЃ РµСЃС‚СЊ РїРµСЂСЃРѕРЅР°Р¶ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ [РµСЃР»Рё id > 0], 
+		 С‚Рѕ СѓРґР°Р»СЏРµРј РµРіРѕ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…*/
 		if(characterIdDelete > 0){
-			/*удаляем персонажа по id
-			 Общий запрос: DELETE FROM TABLE_NAME WHERE ID = characterIdDelete*/ 
+			/*СѓРґР°Р»СЏРµРј РїРµСЂСЃРѕРЅР°Р¶Р° РїРѕ id
+			 РћР±С‰РёР№ Р·Р°РїСЂРѕСЃ: DELETE FROM TABLE_NAME WHERE ID = characterIdDelete*/ 
 			db.delete(
 					SuperheroEntry.TABLE_NAME,
 					SuperheroEntry._ID + "=?",
 					new String[]{"" + characterIdDelete}
 					);
 		
-			//обнуляем массивы, чтобы позже обновить содержимое
+			//РѕР±РЅСѓР»СЏРµРј РјР°СЃСЃРёРІС‹, С‡С‚РѕР±С‹ РїРѕР·Р¶Рµ РѕР±РЅРѕРІРёС‚СЊ СЃРѕРґРµСЂР¶РёРјРѕРµ
 			characters.clear();
 			charactersId.clear();
 		
-			//сообщаем адаптеру, что данные изменилис
+			//СЃРѕРѕР±С‰Р°РµРј Р°РґР°РїС‚РµСЂСѓ, С‡С‚Рѕ РґР°РЅРЅС‹Рµ РёР·РјРµРЅРёР»РёСЃ
 			customAdapter.notifyDataSetChanged();
 		
-			//заново выводим обновленные данные
+			//Р·Р°РЅРѕРІРѕ РІС‹РІРѕРґРёРј РѕР±РЅРѕРІР»РµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ
 			displayDatabaseInfo();
 			
-			//сообщаем об удалении
+			//СЃРѕРѕР±С‰Р°РµРј РѕР± СѓРґР°Р»РµРЅРёРё
 			Toast.makeText(
 					this,
-					"УДАЛЕНО!",
+					"РЈР”РђР›Р•РќРћ!",
 					Toast.LENGTH_LONG
 				).show();
 			
-			//персонажа для удаления пока нет
+			//РїРµСЂСЃРѕРЅР°Р¶Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РїРѕРєР° РЅРµС‚
 			characterIdDelete = -1;
 		}else{
-			/*при ошибке удаления, например когда мы не выбрали  
-			  персонажа для удаления - выводим сообщение об ошибке*/
+			/*РїСЂРё РѕС€РёР±РєРµ СѓРґР°Р»РµРЅРёСЏ, РЅР°РїСЂРёРјРµСЂ РєРѕРіРґР° РјС‹ РЅРµ РІС‹Р±СЂР°Р»Рё  
+			  РїРµСЂСЃРѕРЅР°Р¶Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ - РІС‹РІРѕРґРёРј СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ*/
 			Toast.makeText(
 					this,
-					"Ошибка удаления!",
+					"РћС€РёР±РєР° СѓРґР°Р»РµРЅРёСЏ!",
 					Toast.LENGTH_LONG
 				).show();
 		}
 	}
 	
-	//полное очищение персонажей из базы данных
+	//РїРѕР»РЅРѕРµ РѕС‡РёС‰РµРЅРёРµ РїРµСЂСЃРѕРЅР°Р¶РµР№ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	public void deleteCharactersAll(){
-		//берем базу данных для записи
+		//Р±РµСЂРµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С… РґР»СЏ Р·Р°РїРёСЃРё
 		SQLiteDatabase db = DbHelper.getWritableDatabase();
 		
-		/*если в базе данных есть данные по персонажам, 
-		  значит и массив с id персонажами будет заполнен*/
+		/*РµСЃР»Рё РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С… РµСЃС‚СЊ РґР°РЅРЅС‹Рµ РїРѕ РїРµСЂСЃРѕРЅР°Р¶Р°Рј, 
+		  Р·РЅР°С‡РёС‚ Рё РјР°СЃСЃРёРІ СЃ id РїРµСЂСЃРѕРЅР°Р¶Р°РјРё Р±СѓРґРµС‚ Р·Р°РїРѕР»РЅРµРЅ*/
 		if(charactersId.size() > 0){
-			/*пробегаемся по всем доступным id персонажей
-			  и удаляем по одному
-			  Общий запрос: DELETE FROM TABLE_NAME WHERE ID = characterId.get(i)*/
+			/*РїСЂРѕР±РµРіР°РµРјСЃСЏ РїРѕ РІСЃРµРј РґРѕСЃС‚СѓРїРЅС‹Рј id РїРµСЂСЃРѕРЅР°Р¶РµР№
+			  Рё СѓРґР°Р»СЏРµРј РїРѕ РѕРґРЅРѕРјСѓ
+			  РћР±С‰РёР№ Р·Р°РїСЂРѕСЃ: DELETE FROM TABLE_NAME WHERE ID = characterId.get(i)*/
 			for(int i = 0; i < charactersId.size(); i++)
 			db.delete(
 					SuperheroEntry.TABLE_NAME,
@@ -213,41 +213,41 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 					new String[]{"" + charactersId.get(i)}
 					);
 		
-			//обнуляем массивы
+			//РѕР±РЅСѓР»СЏРµРј РјР°СЃСЃРёРІС‹
 			characters.clear();
 			charactersId.clear();
 		
-			//сообщаем адаптеру, что данные изменилис
+			//СЃРѕРѕР±С‰Р°РµРј Р°РґР°РїС‚РµСЂСѓ, С‡С‚Рѕ РґР°РЅРЅС‹Рµ РёР·РјРµРЅРёР»РёСЃ
 			customAdapter.notifyDataSetChanged();
 		
-			//заново выводим обновленные данные
+			//Р·Р°РЅРѕРІРѕ РІС‹РІРѕРґРёРј РѕР±РЅРѕРІР»РµРЅРЅС‹Рµ РґР°РЅРЅС‹Рµ
 			displayDatabaseInfo();
 			
-			//сообщаем об очищении
+			//СЃРѕРѕР±С‰Р°РµРј РѕР± РѕС‡РёС‰РµРЅРёРё
 			Toast.makeText(
 					this,
-					"Данные очищены!",
+					"Р”Р°РЅРЅС‹Рµ РѕС‡РёС‰РµРЅС‹!",
 					Toast.LENGTH_LONG
 				).show();
 		}else{
-			/*сообщаем об ошибке, например, когда данных 
-			  для удаления вообще нет*/
+			/*СЃРѕРѕР±С‰Р°РµРј РѕР± РѕС€РёР±РєРµ, РЅР°РїСЂРёРјРµСЂ, РєРѕРіРґР° РґР°РЅРЅС‹С… 
+			  РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РІРѕРѕР±С‰Рµ РЅРµС‚*/
 			Toast.makeText(
 					this,
-					"Нет данных для удаления!",
+					"РќРµС‚ РґР°РЅРЅС‹С… РґР»СЏ СѓРґР°Р»РµРЅРёСЏ!",
 					Toast.LENGTH_LONG
 				).show();
 		}
 	}
 	
-	//отображение данных персонажей из базы данных
+	//РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶РµР№ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	public void displayDatabaseInfo(){
-		//берем базу данных для чтения
+		//Р±РµСЂРµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С… РґР»СЏ С‡С‚РµРЅРёСЏ
 		SQLiteDatabase db = DbHelper.getReadableDatabase();
 		
-		/*данные по каким столбцам мы хотим получить?
-		  в нашем случае это id по базе данных, id по api, имя персонажа
-		  и ссылка на изображение */
+		/*РґР°РЅРЅС‹Рµ РїРѕ РєР°РєРёРј СЃС‚РѕР»Р±С†Р°Рј РјС‹ С…РѕС‚РёРј РїРѕР»СѓС‡РёС‚СЊ?
+		  РІ РЅР°С€РµРј СЃР»СѓС‡Р°Рµ СЌС‚Рѕ id РїРѕ Р±Р°Р·Рµ РґР°РЅРЅС‹С…, id РїРѕ api, РёРјСЏ РїРµСЂСЃРѕРЅР°Р¶Р°
+		  Рё СЃСЃС‹Р»РєР° РЅР° РёР·РѕР±СЂР°Р¶РµРЅРёРµ */
 		String[] projection = {
 				SuperheroEntry._ID,
 				SuperheroEntry.COLUMN_ID,
@@ -255,7 +255,7 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 				SuperheroEntry.COLUMN_IMAGE_URL
 		};
 		
-		//условия вывода
+		//СѓСЃР»РѕРІРёСЏ РІС‹РІРѕРґР°
 		Cursor cursor = db.query(
 					SuperheroEntry.TABLE_NAME, 
 					projection,
@@ -268,79 +268,79 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 		
 		try{
 			
-			//получаем индексы столбцов
+			//РїРѕР»СѓС‡Р°РµРј РёРЅРґРµРєСЃС‹ СЃС‚РѕР»Р±С†РѕРІ
 			int idIndex = cursor.getColumnIndex(SuperheroEntry._ID);
 			int idMainIndex = cursor.getColumnIndex(SuperheroEntry.COLUMN_ID);
 			int nameIndex = cursor.getColumnIndex(SuperheroEntry.COLUMN_CHARACTER);
 			int imageIndex = cursor.getColumnIndex(SuperheroEntry.COLUMN_IMAGE_URL);
 			
-			//пробегаемся по всем данным из базы данных
+			//РїСЂРѕР±РµРіР°РµРјСЃСЏ РїРѕ РІСЃРµРј РґР°РЅРЅС‹Рј РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 			while(cursor.moveToNext()){
-				//получаем нужные нам данные из базы данных
+				//РїРѕР»СѓС‡Р°РµРј РЅСѓР¶РЅС‹Рµ РЅР°Рј РґР°РЅРЅС‹Рµ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 				int currentId = cursor.getInt(idIndex);
 				int currentIdMain = cursor.getInt(idMainIndex);
 				String currentCharacter = cursor.getString(nameIndex);
 				String currentImageUrl = cursor.getString(imageIndex);
 				
-				/*добавляем персонажа с изображением и именем в наш массив,
-				  чтобы потом вывести его на экран, в виде списка*/
+				/*РґРѕР±Р°РІР»СЏРµРј РїРµСЂСЃРѕРЅР°Р¶Р° СЃ РёР·РѕР±СЂР°Р¶РµРЅРёРµРј Рё РёРјРµРЅРµРј РІ РЅР°С€ РјР°СЃСЃРёРІ,
+				  С‡С‚РѕР±С‹ РїРѕС‚РѕРј РІС‹РІРµСЃС‚Рё РµРіРѕ РЅР° СЌРєСЂР°РЅ, РІ РІРёРґРµ СЃРїРёСЃРєР°*/
 				characters.add(new Character(currentIdMain + ". " + currentCharacter, currentImageUrl));
 				
-				/*запоминаем id элементов, которые есть на экране
-				  это нужно, чтобы после удаления элементов из списка - 
-				  мы знали какие именно элементы остались, по id базы данных, а 
-				  не по id самого списка*/
+				/*Р·Р°РїРѕРјРёРЅР°РµРј id СЌР»РµРјРµРЅС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ РµСЃС‚СЊ РЅР° СЌРєСЂР°РЅРµ
+				  СЌС‚Рѕ РЅСѓР¶РЅРѕ, С‡С‚РѕР±С‹ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ РёР· СЃРїРёСЃРєР° - 
+				  РјС‹ Р·РЅР°Р»Рё РєР°РєРёРµ РёРјРµРЅРЅРѕ СЌР»РµРјРµРЅС‚С‹ РѕСЃС‚Р°Р»РёСЃСЊ, РїРѕ id Р±Р°Р·С‹ РґР°РЅРЅС‹С…, Р° 
+				  РЅРµ РїРѕ id СЃР°РјРѕРіРѕ СЃРїРёСЃРєР°*/
 				charactersId.add(currentId);
 				
-				//создаем адаптер для списка
+				//СЃРѕР·РґР°РµРј Р°РґР°РїС‚РµСЂ РґР»СЏ СЃРїРёСЃРєР°
 				customAdapter = new CustomAdapter(
 						this,
 						R.layout.new_list_item,
 						characters
 					);
 			
-				//связываем список с данными персонажей
+				//СЃРІСЏР·С‹РІР°РµРј СЃРїРёСЃРѕРє СЃ РґР°РЅРЅС‹РјРё РїРµСЂСЃРѕРЅР°Р¶РµР№
 				listCharacters.setAdapter(customAdapter);
 				
-				//обновляем адаптер
+				//РѕР±РЅРѕРІР»СЏРµРј Р°РґР°РїС‚РµСЂ
 				customAdapter.notifyDataSetChanged();
 			}
 			
 		}catch(Exception ex){
 			
 		}finally{
-			//закрываем базу данных
+			//Р·Р°РєСЂС‹РІР°РµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
 			db.close();
 			cursor.close();
 		}
 	}
 	
-	/*получение данных персонажей по api
-	  вводим имя персонажа и запрашиваем данные*/
+	/*РїРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶РµР№ РїРѕ api
+	  РІРІРѕРґРёРј РёРјСЏ РїРµСЂСЃРѕРЅР°Р¶Р° Рё Р·Р°РїСЂР°С€РёРІР°РµРј РґР°РЅРЅС‹Рµ*/
 	public void getCharacterData1(){
-		//данные получит наш подписчик
+		//РґР°РЅРЅС‹Рµ РїРѕР»СѓС‡РёС‚ РЅР°С€ РїРѕРґРїРёСЃС‡РёРє
 		Subscriber<Characters> subscriber = new Subscriber<Characters>(){
-			//загрузка данных
+			//Р·Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С…
 			public void onNext(@NonNull Characters charactersAll){
-				//получаем всех персонажей на странице
+				//РїРѕР»СѓС‡Р°РµРј РІСЃРµС… РїРµСЂСЃРѕРЅР°Р¶РµР№ РЅР° СЃС‚СЂР°РЅРёС†Рµ
 				Results[] results = charactersAll.getResults();
 				
-				//проверка, чтобы у нас были данные для вывода
+				//РїСЂРѕРІРµСЂРєР°, С‡С‚РѕР±С‹ Сѓ РЅР°СЃ Р±С‹Р»Рё РґР°РЅРЅС‹Рµ РґР»СЏ РІС‹РІРѕРґР°
 				if(results != null)
-					//пробегаемся по всем полученным персонажам
+					//РїСЂРѕР±РµРіР°РµРјСЃСЏ РїРѕ РІСЃРµРј РїРѕР»СѓС‡РµРЅРЅС‹Рј РїРµСЂСЃРѕРЅР°Р¶Р°Рј
 					for(int i = 0; i < results.length; i++){
-						//берем персонажа
+						//Р±РµСЂРµРј РїРµСЂСЃРѕРЅР°Р¶Р°
 						Results result = results[i];
 						
-						//получаем данные персонажа
+						//РїРѕР»СѓС‡Р°РµРј РґР°РЅРЅС‹Рµ РїРµСЂСЃРѕРЅР°Р¶Р°
 						int characterId = result.getId();
 	
 						String characterCharacter = result.getName();
 
-						/*в самих получаемых данных Json, в некоторых местах бывает null,
-						  поэтому, нужно заранее проверять: null или нет. Проверка нужна
-						  только у данных типа int
-						  в нашем случае это интеллект, сила и скорость*/
+						/*РІ СЃР°РјРёС… РїРѕР»СѓС‡Р°РµРјС‹С… РґР°РЅРЅС‹С… Json, РІ РЅРµРєРѕС‚РѕСЂС‹С… РјРµСЃС‚Р°С… Р±С‹РІР°РµС‚ null,
+						  РїРѕСЌС‚РѕРјСѓ, РЅСѓР¶РЅРѕ Р·Р°СЂР°РЅРµРµ РїСЂРѕРІРµСЂСЏС‚СЊ: null РёР»Рё РЅРµС‚. РџСЂРѕРІРµСЂРєР° РЅСѓР¶РЅР°
+						  С‚РѕР»СЊРєРѕ Сѓ РґР°РЅРЅС‹С… С‚РёРїР° int
+						  РІ РЅР°С€РµРј СЃР»СѓС‡Р°Рµ СЌС‚Рѕ РёРЅС‚РµР»Р»РµРєС‚, СЃРёР»Р° Рё СЃРєРѕСЂРѕСЃС‚СЊ*/
 						int characterIntelligence;
 						String characterIntelligenceTemp = result.getPowerstats().getIntelligence();
 					
@@ -379,7 +379,7 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 					
 						String characterImage = result.getImage().getUrl();
 						
-						//и сразу добавляем в базу данных
+						//Рё СЃСЂР°Р·Сѓ РґРѕР±Р°РІР»СЏРµРј РІ Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
 						SQLiteDatabase db = DbHelper.getWritableDatabase();
 						ContentValues values = new ContentValues();
 						
@@ -404,52 +404,52 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 									values
 								);
 						
-						//очищаем списки с персонажами и их id, для обновления
+						//РѕС‡РёС‰Р°РµРј СЃРїРёСЃРєРё СЃ РїРµСЂСЃРѕРЅР°Р¶Р°РјРё Рё РёС… id, РґР»СЏ РѕР±РЅРѕРІР»РµРЅРёСЏ
 						characters.clear();
 						charactersId.clear();
 						
-						//заново отображаем данные из базы данных
+						//Р·Р°РЅРѕРІРѕ РѕС‚РѕР±СЂР°Р¶Р°РµРј РґР°РЅРЅС‹Рµ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 						displayDatabaseInfo();
 					}else
 						Toast.makeText(
 								getApplicationContext(),
-								"Введите корректное имя супергероя!",
+								"Р’РІРµРґРёС‚Рµ РєРѕСЂСЂРµРєС‚РЅРѕРµ РёРјСЏ СЃСѓРїРµСЂРіРµСЂРѕСЏ!",
 								Toast.LENGTH_LONG
 								).show();
 			}
 				
-			//ошибки при загрузки данных 
+			//РѕС€РёР±РєРё РїСЂРё Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… 
 			public void onError(Throwable e){
-				//выводим сообщение об ошибке
+				//РІС‹РІРѕРґРёРј СЃРѕРѕР±С‰РµРЅРёРµ РѕР± РѕС€РёР±РєРµ
 				Toast.makeText(
 						getApplicationContext(),
-						"Ошибка загрузки данных: " + e,
+						"РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…: " + e,
 						Toast.LENGTH_LONG
 					).show();
 				
 				Log.v("SUPER HERO", "ERROR: " + e);
 			}
 				
-			//удачное завершение загрузки данных
+			//СѓРґР°С‡РЅРѕРµ Р·Р°РІРµСЂС€РµРЅРёРµ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С…
 			public void onComplete(){
-				//выводим сообщение об удачном завершении загрузки
+				//РІС‹РІРѕРґРёРј СЃРѕРѕР±С‰РµРЅРёРµ РѕР± СѓРґР°С‡РЅРѕРј Р·Р°РІРµСЂС€РµРЅРёРё Р·Р°РіСЂСѓР·РєРё
 				Toast.makeText(
 						getApplicationContext(),
-						"Данные будут загружены!",
+						"Р”Р°РЅРЅС‹Рµ Р±СѓРґСѓС‚ Р·Р°РіСЂСѓР¶РµРЅС‹!",
 						Toast.LENGTH_LONG
 					).show();
 			}
 				
-			//нужно явно запросить данные
+			//РЅСѓР¶РЅРѕ СЏРІРЅРѕ Р·Р°РїСЂРѕСЃРёС‚СЊ РґР°РЅРЅС‹Рµ
 			public void onSubscribe(Subscription s){
 				s.request(Long.MAX_VALUE);
 			}
 		};
 			
-		/*запрос api, используя паттерн "Одиночка"
-		  загружаем по введенному имени nameForDisplayData
-		  общий запрос: https://www.superheroapi.com/api.php/894384864360671/search/batman
-		  где число это ключ, который дает при регистрации*/
+		/*Р·Р°РїСЂРѕСЃ api, РёСЃРїРѕР»СЊР·СѓСЏ РїР°С‚С‚РµСЂРЅ "РћРґРёРЅРѕС‡РєР°"
+		  Р·Р°РіСЂСѓР¶Р°РµРј РїРѕ РІРІРµРґРµРЅРЅРѕРјСѓ РёРјРµРЅРё nameForDisplayData
+		  РѕР±С‰РёР№ Р·Р°РїСЂРѕСЃ: https://www.superheroapi.com/api.php/894384864360671/search/batman
+		  РіРґРµ С‡РёСЃР»Рѕ СЌС‚Рѕ РєР»СЋС‡, РєРѕС‚РѕСЂС‹Р№ РґР°РµС‚ РїСЂРё СЂРµРіРёСЃС‚СЂР°С†РёРё*/
 		SuperheroService
 				.getInstance()
 				.getSuperheroApi()
@@ -460,14 +460,14 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 					
 	}
 	
-	/*при долгом нажатии на персонажа из списка,
-	  будем удалять персонажа из базы данных*/
+	/*РїСЂРё РґРѕР»РіРѕРј РЅР°Р¶Р°С‚РёРё РЅР° РїРµСЂСЃРѕРЅР°Р¶Р° РёР· СЃРїРёСЃРєР°,
+	  Р±СѓРґРµРј СѓРґР°Р»СЏС‚СЊ РїРµСЂСЃРѕРЅР°Р¶Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…*/
 	@Override
 	public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id){
-		//получаем id персонажа, на которого мы нажали
+		//РїРѕР»СѓС‡Р°РµРј id РїРµСЂСЃРѕРЅР°Р¶Р°, РЅР° РєРѕС‚РѕСЂРѕРіРѕ РјС‹ РЅР°Р¶Р°Р»Рё
 		characterIdDelete = charactersId.get(position);
 		
-		//диалоговое окно для подтверждения удаления персонажа 
+		//РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ СѓРґР°Р»РµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶Р° 
 		FragmentManager manager = getSupportFragmentManager();
 		DeleteDialog dialog = new DeleteDialog();
 		dialog.show(manager, "delete_dialog");
@@ -475,30 +475,30 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 		return true;
 	}
 	
-	/*при обычно нажатии на персонажа из списка,
-	  будет сделан переход на другое окно, для отображения
-	  данных по выбранному персонажу*/
+	/*РїСЂРё РѕР±С‹С‡РЅРѕ РЅР°Р¶Р°С‚РёРё РЅР° РїРµСЂСЃРѕРЅР°Р¶Р° РёР· СЃРїРёСЃРєР°,
+	  Р±СѓРґРµС‚ СЃРґРµР»Р°РЅ РїРµСЂРµС…РѕРґ РЅР° РґСЂСѓРіРѕРµ РѕРєРЅРѕ, РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ
+	  РґР°РЅРЅС‹С… РїРѕ РІС‹Р±СЂР°РЅРЅРѕРјСѓ РїРµСЂСЃРѕРЅР°Р¶Сѓ*/
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-		//переход на окно CurrentData
+		//РїРµСЂРµС…РѕРґ РЅР° РѕРєРЅРѕ CurrentData
 		intent = new Intent(this, CurrentData.class);
 		
-		//получаем id персонажа из списка, на которого мы нажали
+		//РїРѕР»СѓС‡Р°РµРј id РїРµСЂСЃРѕРЅР°Р¶Р° РёР· СЃРїРёСЃРєР°, РЅР° РєРѕС‚РѕСЂРѕРіРѕ РјС‹ РЅР°Р¶Р°Р»Рё
 		int characterId = charactersId.get(position);
 		
-		/*передаем в другое окно id персонажа [из базы данных]
-		  чтобы знать данные какого персонажа выводить*/
+		/*РїРµСЂРµРґР°РµРј РІ РґСЂСѓРіРѕРµ РѕРєРЅРѕ id РїРµСЂСЃРѕРЅР°Р¶Р° [РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…]
+		  С‡С‚РѕР±С‹ Р·РЅР°С‚СЊ РґР°РЅРЅС‹Рµ РєР°РєРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р° РІС‹РІРѕРґРёС‚СЊ*/
 		intent.putExtra(KEY_ID, characterId);
 		
 		startActivity(intent);
 	}
 	
-	//обработка касаний экрана
+	//РѕР±СЂР°Р±РѕС‚РєР° РєР°СЃР°РЅРёР№ СЌРєСЂР°РЅР°
 	@Override
 	public boolean onTouch(View view, MotionEvent event){
 		
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
-			//кнопка загрузки данных супергероя
+			//РєРЅРѕРїРєР° Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… СЃСѓРїРµСЂРіРµСЂРѕСЏ
 			if(view == buttonGetData){
 				nameForDisplayData = editName.getText().toString().trim();
 				
@@ -508,20 +508,20 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 				}else{
 					Toast.makeText(
 							this,
-							"Введите имя супергероя",
+							"Р’РІРµРґРёС‚Рµ РёРјСЏ СЃСѓРїРµСЂРіРµСЂРѕСЏ",
 							Toast.LENGTH_LONG
 						).show();
 				}
 			}
 			
-			//кнопка очищения данных из базы данных
+			//РєРЅРѕРїРєР° РѕС‡РёС‰РµРЅРёСЏ РґР°РЅРЅС‹С… РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 			if(view == buttonClearData){
-				//диалоговое окно для подтверждения очистики базы данных
+				//РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РѕС‡РёСЃС‚РёРєРё Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 				FragmentManager manager = getSupportFragmentManager();
 				DeleteAllDialog dialog = new DeleteAllDialog();
 				dialog.show(manager, "delete_dialog_all");
 				
-				/*можно полностью удалить базу данных и создать новую
+				/*РјРѕР¶РЅРѕ РїРѕР»РЅРѕСЃС‚СЊСЋ СѓРґР°Р»РёС‚СЊ Р±Р°Р·Сѓ РґР°РЅРЅС‹С… Рё СЃРѕР·РґР°С‚СЊ РЅРѕРІСѓСЋ
 				  SQLiteDatabase db = DbHelper.getWritableDatabase();
 				  DbHelper.onUpgrade(db, 1, 1);
 				
@@ -531,12 +531,12 @@ public class Main extends FragmentActivity implements OnTouchListener, OnItemCli
 				  displayDatabaseInfo();*/
 			}
 			
-			//кнопка удаления персонажа
+			//РєРЅРѕРїРєР° СѓРґР°Р»РµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶Р°
 			if(view == buttonDeleteData){
-				//выводим сообщение с указаниями для удаления
+				//РІС‹РІРѕРґРёРј СЃРѕРѕР±С‰РµРЅРёРµ СЃ СѓРєР°Р·Р°РЅРёСЏРјРё РґР»СЏ СѓРґР°Р»РµРЅРёСЏ
 				Toast.makeText(
 							this,
-							"Для удаление элемента - удерживайте его нажатым",
+							"Р”Р»СЏ СѓРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р° - СѓРґРµСЂР¶РёРІР°Р№С‚Рµ РµРіРѕ РЅР°Р¶Р°С‚С‹Рј",
 							Toast.LENGTH_LONG
 						).show();
 

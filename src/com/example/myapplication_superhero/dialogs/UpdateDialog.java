@@ -1,4 +1,4 @@
-//Диалоговое окно с подтверждением обновление персонажа в базе данных
+//Р”РёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ СЃ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёРµРј РѕР±РЅРѕРІР»РµРЅРёРµ РїРµСЂСЃРѕРЅР°Р¶Р° РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…
 
 package com.example.myapplication_superhero.dialogs;
 
@@ -18,11 +18,11 @@ public class UpdateDialog extends DialogFragment{
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
 		builder
-			.setTitle("ВНИМАНИЕ!")
-			.setMessage("Вы подтверждаете обновление данных персонажа?")
+			.setTitle("Р’РќРРњРђРќРР•!")
+			.setMessage("Р’С‹ РїРѕРґС‚РІРµСЂР¶РґР°РµС‚Рµ РѕР±РЅРѕРІР»РµРЅРёРµ РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶Р°?")
 			.setCancelable(true)
 			.setPositiveButton(
-					"Нет",
+					"РќРµС‚",
 					new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int id){
 							dialog.cancel();
@@ -30,11 +30,11 @@ public class UpdateDialog extends DialogFragment{
 					}
 				)
 			.setNegativeButton(
-					"Да",
+					"Р”Р°",
 					new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int id){
-							/*если подтвердили обновление, то вызываем метод updateCharacter из класса UpdateMain,
-							 чтобы обновить данные персонажа в базе данных */
+							/*РµСЃР»Рё РїРѕРґС‚РІРµСЂРґРёР»Рё РѕР±РЅРѕРІР»РµРЅРёРµ, С‚Рѕ РІС‹Р·С‹РІР°РµРј РјРµС‚РѕРґ updateCharacter РёР· РєР»Р°СЃСЃР° UpdateMain,
+							 С‡С‚РѕР±С‹ РѕР±РЅРѕРІРёС‚СЊ РґР°РЅРЅС‹Рµ РїРµСЂСЃРѕРЅР°Р¶Р° РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С… */
 							((UpdateData)getActivity()).updateCharacter();
 						}
 					}

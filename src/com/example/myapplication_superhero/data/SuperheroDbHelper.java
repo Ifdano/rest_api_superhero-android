@@ -1,4 +1,4 @@
-//Класс для создания базы данных
+//РљР»Р°СЃСЃ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 
 package com.example.myapplication_superhero.data;
 
@@ -10,12 +10,12 @@ import android.content.Context;
 import com.example.myapplication_superhero.data.SuperheroContract.SuperheroEntry;
 
 public class SuperheroDbHelper extends SQLiteOpenHelper{
-	//название базы данных
+	//РЅР°Р·РІР°РЅРёРµ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	public static final String DATABASE_NAME = "superheroes.db";
-	//версия
+	//РІРµСЂСЃРёСЏ
 	public static final int DATABASE_VERSION = 1;
 	
-	//запрос на создание таблицы в базе данных
+	//Р·Р°РїСЂРѕСЃ РЅР° СЃРѕР·РґР°РЅРёРµ С‚Р°Р±Р»РёС†С‹ РІ Р±Р°Р·Рµ РґР°РЅРЅС‹С…
 	public static final String SQL_TABLE = "CREATE TABLE " + 
 			SuperheroEntry.TABLE_NAME + "(" +
 			SuperheroEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -41,16 +41,16 @@ public class SuperheroDbHelper extends SQLiteOpenHelper{
 	
 	@Override
 	public void onCreate(SQLiteDatabase db){
-		//создаем таблицу
+		//СЃРѕР·РґР°РµРј С‚Р°Р±Р»РёС†Сѓ
 		db.execSQL(SQL_TABLE);
 	}
 
-	//обновление базы данных
+	//РѕР±РЅРѕРІР»РµРЅРёРµ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-		//удаляем таблицу
+		//СѓРґР°Р»СЏРµРј С‚Р°Р±Р»РёС†Сѓ
 		db.execSQL("DROP TABLE IF EXISTS " + SuperheroEntry.TABLE_NAME + ";");
-		//создаем новую
+		//СЃРѕР·РґР°РµРј РЅРѕРІСѓСЋ
 		onCreate(db);
 	}
 }

@@ -1,4 +1,4 @@
-//Диалоговое окно с подтверждением возврата на главный экран
+//Р”РёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ СЃ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёРµРј РІРѕР·РІСЂР°С‚Р° РЅР° РіР»Р°РІРЅС‹Р№ СЌРєСЂР°РЅ
 
 package com.example.myapplication_superhero.dialogs;
 
@@ -18,11 +18,11 @@ public class BackMainDialog extends DialogFragment{
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
 		builder
-			.setTitle("ВНИМАНИЕ!")
-			.setMessage("Данные будут потеряны. Выйти из редактора?")
+			.setTitle("Р’РќРРњРђРќРР•!")
+			.setMessage("Р”Р°РЅРЅС‹Рµ Р±СѓРґСѓС‚ РїРѕС‚РµСЂСЏРЅС‹. Р’С‹Р№С‚Рё РёР· СЂРµРґР°РєС‚РѕСЂР°?")
 			.setCancelable(true)
 			.setPositiveButton(
-					"Нет",
+					"РќРµС‚",
 					new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int id){
 							dialog.cancel();
@@ -30,11 +30,11 @@ public class BackMainDialog extends DialogFragment{
 					}
 				)
 			.setNegativeButton(
-					"Да",
+					"Р”Р°",
 					new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int id){
-							/*если подтвердили возврат, то вызываем метод setBackMain из класса UpdateData,
-							 чтобы вернуться на главный экран*/
+							/*РµСЃР»Рё РїРѕРґС‚РІРµСЂРґРёР»Рё РІРѕР·РІСЂР°С‚, С‚Рѕ РІС‹Р·С‹РІР°РµРј РјРµС‚РѕРґ setBackMain РёР· РєР»Р°СЃСЃР° UpdateData,
+							 С‡С‚РѕР±С‹ РІРµСЂРЅСѓС‚СЊСЃСЏ РЅР° РіР»Р°РІРЅС‹Р№ СЌРєСЂР°РЅ*/
 							((UpdateData)getActivity()).setBackMain();
 						}
 					}

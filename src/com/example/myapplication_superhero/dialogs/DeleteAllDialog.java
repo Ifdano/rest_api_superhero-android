@@ -1,4 +1,4 @@
-//Диалоговое окно для подтверждения очистики базы данных
+//Р”РёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ РѕС‡РёСЃС‚РёРєРё Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 
 package com.example.myapplication_superhero.dialogs;
 
@@ -18,11 +18,11 @@ public class DeleteAllDialog extends DialogFragment{
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		
 		builder
-			.setTitle("ВНИМАНИЕ!")
-			.setMessage("Вы подтверждаете очистку базы данных?")
+			.setTitle("Р’РќРРњРђРќРР•!")
+			.setMessage("Р’С‹ РїРѕРґС‚РІРµСЂР¶РґР°РµС‚Рµ РѕС‡РёСЃС‚РєСѓ Р±Р°Р·С‹ РґР°РЅРЅС‹С…?")
 			.setCancelable(true)
 			.setPositiveButton(
-					"Нет",
+					"РќРµС‚",
 					new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int id){
 							dialog.cancel();
@@ -30,7 +30,7 @@ public class DeleteAllDialog extends DialogFragment{
 					}
 				)
 			.setNegativeButton(
-					"Да",
+					"Р”Р°",
 					new DialogInterface.OnClickListener(){
 						public void onClick(DialogInterface dialog, int id){
 							((Main)getActivity()).deleteCharactersAll();

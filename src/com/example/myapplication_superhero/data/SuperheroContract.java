@@ -1,4 +1,4 @@
-//Љласс с данные по таблицами базы данных
+//РљР»Р°СЃСЃ СЃ РґР°РЅРЅС‹Рµ РїРѕ С‚Р°Р±Р»РёС†Р°РјРё Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 
 package com.example.myapplication_superhero.data;
 
@@ -6,12 +6,12 @@ import android.provider.BaseColumns;
 
 public final class SuperheroContract {
 
-	//класс с данными таблицы базы данных
+	//РєР»Р°СЃСЃ СЃ РґР°РЅРЅС‹РјРё С‚Р°Р±Р»РёС†С‹ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	public static final class SuperheroEntry implements BaseColumns{
-		//название таблицы
+		//РЅР°Р·РІР°РЅРёРµ С‚Р°Р±Р»РёС†С‹
 		public static final String TABLE_NAME = "superheroes";
 		
-		//названиЯ столбцов
+		//РЅР°Р·РІР°РЅРёСЏ СЃС‚РѕР»Р±С†РѕРІ
 		public static final String _ID = BaseColumns._ID;
 		public static final String COLUMN_ID = "id_main";
 		public static final String COLUMN_CHARACTER = "character";

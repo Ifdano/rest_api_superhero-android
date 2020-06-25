@@ -1,4 +1,4 @@
-//Класс для отображения данных конкретного персонажа, по id
+//РљР»Р°СЃСЃ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РґР°РЅРЅС‹С… РєРѕРЅРєСЂРµС‚РЅРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р°, РїРѕ id
 
 package com.example.myapplication_superhero;
 
@@ -11,34 +11,34 @@ import android.view.View;
 import android.view.MotionEvent;
 import android.view.View.OnTouchListener;
 
-//компоненты окна
+//РєРѕРјРїРѕРЅРµРЅС‚С‹ РѕРєРЅР°
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//для базы данных
+//РґР»СЏ Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import android.content.Intent;
 
-//загрузка изображений с Picasso
+//Р·Р°РіСЂСѓР·РєР° РёР·РѕР±СЂР°Р¶РµРЅРёР№ СЃ Picasso
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Callback;
 
 import com.example.myapplication_superhero.data.SuperheroContract.SuperheroEntry;
 import com.example.myapplication_superhero.data.SuperheroDbHelper;
 
-//диалоговое окно для удаления персонажа
+//РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ СѓРґР°Р»РµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶Р°
 import com.example.myapplication_superhero.dialogs.DeleteDialogCurrent;
 
 public class CurrentData extends FragmentActivity implements OnTouchListener{
-	/*для получения/передачи ID персонажа из базы данных, которого мы выбрали,
-	  чтобы знать данные какого персонажа нужно вывести*/
+	/*РґР»СЏ РїРѕР»СѓС‡РµРЅРёСЏ/РїРµСЂРµРґР°С‡Рё ID РїРµСЂСЃРѕРЅР°Р¶Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…, РєРѕС‚РѕСЂРѕРіРѕ РјС‹ РІС‹Р±СЂР°Р»Рё,
+	  С‡С‚РѕР±С‹ Р·РЅР°С‚СЊ РґР°РЅРЅС‹Рµ РєР°РєРѕРіРѕ РїРµСЂСЃРѕРЅР°Р¶Р° РЅСѓР¶РЅРѕ РІС‹РІРµСЃС‚Рё*/
 	public static final String KEY_ID = "key_id";
 	
-	//компоненты
+	//РєРѕРјРїРѕРЅРµРЅС‚С‹
 	private Button buttonUpdate;
 	private Button buttonDelete;
 	private Button buttonBack;
@@ -60,10 +60,10 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 	
 	private Intent intent;
 	
-	//индекс персонажа, который мы выбрали для удаления
+	//РёРЅРґРµРєСЃ РїРµСЂСЃРѕРЅР°Р¶Р°, РєРѕС‚РѕСЂС‹Р№ РјС‹ РІС‹Р±СЂР°Р»Рё РґР»СЏ СѓРґР°Р»РµРЅРёСЏ
 	private int currentId;
 	
-	//база данных
+	//Р±Р°Р·Р° РґР°РЅРЅС‹С…
 	private SuperheroDbHelper DbHelper;
 	
 	protected void onCreate(Bundle savedInstanceState){
@@ -71,13 +71,13 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 		setContentView(R.layout.activity_current);
 		
 		init();
-		//получение индекса персонажа для удаления
+		//РїРѕР»СѓС‡РµРЅРёРµ РёРЅРґРµРєСЃР° РїРµСЂСЃРѕРЅР°Р¶Р° РґР»СЏ СѓРґР°Р»РµРЅРёСЏ
 		getCharacterId();
 	}
 	
-	//начальная инициализация
+	//РЅР°С‡Р°Р»СЊРЅР°СЏ РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ
 	public void init(){
-		//находим компоненты
+		//РЅР°С…РѕРґРёРј РєРѕРјРїРѕРЅРµРЅС‚С‹
 		buttonUpdate = (Button)findViewById(R.id.buttonUpdate);
 		buttonDelete = (Button)findViewById(R.id.buttonDelete);
 		buttonBack = (Button)findViewById(R.id.buttonBack);
@@ -97,37 +97,37 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 		textApperance = (TextView)findViewById(R.id.textApperance);
 		textPublisher = (TextView)findViewById(R.id.textPublisher);
 		
-		//устанавливаем слушателей
+		//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃР»СѓС€Р°С‚РµР»РµР№
 		buttonUpdate.setOnTouchListener(this);
 		buttonDelete.setOnTouchListener(this);
 		buttonBack.setOnTouchListener(this);
 		
-		//создаем базу данных
+		//СЃРѕР·РґР°РµРј Р±Р°Р·Сѓ РґР°РЅРЅС‹С…
 		DbHelper = new SuperheroDbHelper(this);
 	}
 	
-	//получаем id персонажа, который мы передали в это окно
+	//РїРѕР»СѓС‡Р°РµРј id РїРµСЂСЃРѕРЅР°Р¶Р°, РєРѕС‚РѕСЂС‹Р№ РјС‹ РїРµСЂРµРґР°Р»Рё РІ СЌС‚Рѕ РѕРєРЅРѕ
 	public void getCharacterId(){
 		intent = getIntent();
 		
-		//получаем id
+		//РїРѕР»СѓС‡Р°РµРј id
 		currentId = intent.getIntExtra(KEY_ID, -1);
 		
-		/*если мы получили id, то вызываем метод для вывода данных из
-		 базы данных на экран*/
+		/*РµСЃР»Рё РјС‹ РїРѕР»СѓС‡РёР»Рё id, С‚Рѕ РІС‹Р·С‹РІР°РµРј РјРµС‚РѕРґ РґР»СЏ РІС‹РІРѕРґР° РґР°РЅРЅС‹С… РёР·
+		 Р±Р°Р·С‹ РґР°РЅРЅС‹С… РЅР° СЌРєСЂР°РЅ*/
 		if(currentId > 0){
 			displayDatabaseInfo();
 		}else{
-			//если id не получено - сообщаем об этом
+			//РµСЃР»Рё id РЅРµ РїРѕР»СѓС‡РµРЅРѕ - СЃРѕРѕР±С‰Р°РµРј РѕР± СЌС‚РѕРј
 			Toast.makeText(
 					getApplicationContext(),
-					"Ошибка получения ID",
+					"РћС€РёР±РєР° РїРѕР»СѓС‡РµРЅРёСЏ ID",
 					Toast.LENGTH_LONG
 				).show();
 		}
 	}
 	
-	//отображение данных персонажа из базы данных
+	//РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶Р° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 	public void displayDatabaseInfo(){
 		SQLiteDatabase db = DbHelper.getReadableDatabase();
 		
@@ -147,8 +147,8 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 				SuperheroEntry.COLUMN_IMAGE_URL
 		};
 		
-		/*выборка из базы данных
-		  в нашем случае, мы находим данные персонажа по id*/
+		/*РІС‹Р±РѕСЂРєР° РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
+		  РІ РЅР°С€РµРј СЃР»СѓС‡Р°Рµ, РјС‹ РЅР°С…РѕРґРёРј РґР°РЅРЅС‹Рµ РїРµСЂСЃРѕРЅР°Р¶Р° РїРѕ id*/
 		String selection = SuperheroEntry._ID + "=?";
 		String[] selectionArgs = {"" + currentId};
 		
@@ -179,7 +179,7 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 			int imageUrlIndex = cursor.getColumnIndex(SuperheroEntry.COLUMN_IMAGE_URL);
 			
 			while(cursor.moveToNext()){
-				//получаем все данные из базы данных
+				//РїРѕР»СѓС‡Р°РµРј РІСЃРµ РґР°РЅРЅС‹Рµ РёР· Р±Р°Р·С‹ РґР°РЅРЅС‹С…
 				String currentCharacter = cursor.getString(characterIndex);
 				int currentIntelligence = cursor.getInt(intelligenceIndex);
 				int currentPower = cursor.getInt(powerIndex);
@@ -194,14 +194,14 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 				String currentPublisher = cursor.getString(publisherIndex);
 				String currentImageUrl = cursor.getString(imageUrlIndex);
 				
-				//устанавливаем изображение
+				//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РёР·РѕР±СЂР°Р¶РµРЅРёРµ
 				Callback callback = new Callback(){
 					public void onSuccess(){}
 					
 					public void onError(){}
 				};
 				
-				//загружаем изображение по ссылке
+				//Р·Р°РіСЂСѓР¶Р°РµРј РёР·РѕР±СЂР°Р¶РµРЅРёРµ РїРѕ СЃСЃС‹Р»РєРµ
 				Picasso
 					.with(getApplicationContext())
 					.load(currentImageUrl)
@@ -209,7 +209,7 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 					.error(R.drawable.errorimage)
 					.into(avatarImage);
 				
-				//устанавливаем данные в поля
+				//СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РґР°РЅРЅС‹Рµ РІ РїРѕР»СЏ
 				textCharacter.setText(currentCharacter);
 				textIntelligence.setText("" + currentIntelligence);
 				textPower.setText("" + currentPower);
@@ -232,11 +232,11 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 		}
 	}
 	
-	//удаление персонажа
+	//СѓРґР°Р»РµРЅРёРµ РїРµСЂСЃРѕРЅР°Р¶Р°
 	public void deleteCharacter(){
 		SQLiteDatabase db = DbHelper.getWritableDatabase();
 		
-		//удаляем по id персонажа
+		//СѓРґР°Р»СЏРµРј РїРѕ id РїРµСЂСЃРѕРЅР°Р¶Р°
 		db.delete(
 				SuperheroEntry.TABLE_NAME,
 				SuperheroEntry._ID + "=?",
@@ -245,11 +245,11 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 		
 		Toast.makeText(
 					getApplicationContext(),
-					"УДАЛЕНО!",
+					"РЈР”РђР›Р•РќРћ!",
 					Toast.LENGTH_LONG
 				).show();
 		
-		//после удаления - возвращаемся в главное окно
+		//РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ - РІРѕР·РІСЂР°С‰Р°РµРјСЃСЏ РІ РіР»Р°РІРЅРѕРµ РѕРєРЅРѕ
 		intent = new Intent(this, Main.class);
 		startActivity(intent);
 	}
@@ -257,26 +257,26 @@ public class CurrentData extends FragmentActivity implements OnTouchListener{
 	public boolean onTouch(View view, MotionEvent event){
 		
 		if(event.getAction() == MotionEvent.ACTION_DOWN){
-			//кнопка обновления данных персонажа
+			//РєРЅРѕРїРєР° РѕР±РЅРѕРІР»РµРЅРёСЏ РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶Р°
 			if(view == buttonUpdate){
-				//переходим в окно UpdateData
+				//РїРµСЂРµС…РѕРґРёРј РІ РѕРєРЅРѕ UpdateData
 				intent = new Intent(this, UpdateData.class);
 				
-				//передаем id персонажа, данные которого мы хотим обновить
+				//РїРµСЂРµРґР°РµРј id РїРµСЂСЃРѕРЅР°Р¶Р°, РґР°РЅРЅС‹Рµ РєРѕС‚РѕСЂРѕРіРѕ РјС‹ С…РѕС‚РёРј РѕР±РЅРѕРІРёС‚СЊ
 				intent.putExtra(KEY_ID, currentId);
 				
 				startActivity(intent);
 			}
 			
-			//кнопка удаления персонажа
+			//РєРЅРѕРїРєР° СѓРґР°Р»РµРЅРёСЏ РїРµСЂСЃРѕРЅР°Р¶Р°
 			if(view == buttonDelete){
-				//диалоговое окно для подтверждения удаления
+				//РґРёР°Р»РѕРіРѕРІРѕРµ РѕРєРЅРѕ РґР»СЏ РїРѕРґС‚РІРµСЂР¶РґРµРЅРёСЏ СѓРґР°Р»РµРЅРёСЏ
 				FragmentManager manager = getSupportFragmentManager();
 				DeleteDialogCurrent dialog = new DeleteDialogCurrent();
 				dialog.show(manager, "delete_dialog_current");
 			}
 			
-			//кнопка возвращения на главный экран
+			//РєРЅРѕРїРєР° РІРѕР·РІСЂР°С‰РµРЅРёСЏ РЅР° РіР»Р°РІРЅС‹Р№ СЌРєСЂР°РЅ
 			if(view == buttonBack){
 				intent = new Intent(this, Main.class);
 				startActivity(intent);

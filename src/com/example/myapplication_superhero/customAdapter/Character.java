@@ -1,10 +1,10 @@
-//Класс POJO для создания данных персонажей, чтобы поместить их в список
+//РљР»Р°СЃСЃ POJO РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РґР°РЅРЅС‹С… РїРµСЂСЃРѕРЅР°Р¶РµР№, С‡С‚РѕР±С‹ РїРѕРјРµСЃС‚РёС‚СЊ РёС… РІ СЃРїРёСЃРѕРє
 
 package com.example.myapplication_superhero.customAdapter;
 
 public class Character {
 
-	//данные персонажей
+	//РґР°РЅРЅС‹Рµ РїРµСЂСЃРѕРЅР°Р¶РµР№
 	private String characterName;
 	private String characterAvatarUrl;
 	
@@ -13,7 +13,7 @@ public class Character {
 		this.characterAvatarUrl = characterAvatarUrl;
 	}
 	
-	//получение данных
+	//РїРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С…
 	public String getCharacterName(){ return characterName; }
 	public String getCharacterAvatarUrl(){ return characterAvatarUrl; }
 }

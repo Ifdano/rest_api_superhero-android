@@ -1,4 +1,4 @@
-//Љласс с фрагментом длЯ макета current_fragment
+//РљР»Р°СЃСЃ СЃ С„СЂР°РіРјРµРЅС‚РѕРј РґР»СЏ РјР°РєРµС‚Р° current_fragment
 
 package com.example.myapplication_superhero.fragments;
 
